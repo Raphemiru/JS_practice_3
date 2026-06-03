@@ -6,19 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Game</title>
     <link rel="stylesheet" href="styles.css" />
+</head>
 
 <body>
     <main>
         <!-- QUIZ START SCREEN -->
-        <header>
+        <section class="start-screen" id="start-screen">
             <h1 class="quiz-title" id="quiz-title">QUIZ GAME!</h1>
             <p class="quiz-description" id="quiz-description">Test your knowledge with these fun questions</p>
-            <button type="button" class="quiz-start-button" id="quiz-start-button">Start Quiz</button>
-        </header>
+            <button type="button" class="start-button" id="start-button">Start Quiz</button>
+        </section>
 
-        <!-- QUIZ QUESTIONS -->
-        <section class="quiz-question" id="quiz-question">
-            <!-- QUIZ QUESTIONS HERE -->
+        <!-- QUIZ QUESTIONS SCREEN -->
+        <section class="quiz-screen" id="quiz-screen">
+            <h2 class="quiz-question" id="quiz-question">Question</h2>
+            <div class="quiz-status" id="quiz-status">
+                <p>Question <span class="current-question" id="current-question">1</span> of <span
+                        class="total-questions" id="total-questions">5</span></p>
+                <p>Score: <span class="current-score" id="current-score">0</span></p>
+            </div>
+            <div class="answers" id="answers">
+                answers
+                <!-- JS fills this up -->
+            </div>
+            <div class="progress-bar" id="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
         </section>
     </main>
     <script src="script.js"></script>

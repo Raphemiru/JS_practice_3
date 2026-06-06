@@ -6,6 +6,7 @@ const quizScreen = document.getElementById('quiz-screen');
 const startButton = document.getElementById('start-button');
 
 // quizScreen assets
+const quitButton = document.getElementById('quit-button');
 const quizQuestion = document.getElementById('quiz-question');
 const currentQuestion = document.getElementById('current-question');
 const totalQuestions = document.getElementById('total-questions');
@@ -59,6 +60,18 @@ const startQuiz = () => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
 };
 
+const quitQuiz = () => {
+    let response = confirm("Are you sure you want to quit? Your progress won't be saved");
+
+    if (response) {
+        startScreen.classList.remove('hidden-screen');
+        startScreen.classList.add('show-screen');
+        quizScreen.classList.remove('show-screen');
+        quizScreen.classList.add('hidden-screen');
+    }
+};
+
 startButton.addEventListener('click', startQuiz);
+quitButton.addEventListener('click', quitQuiz);
 
 loadScreen();

@@ -32,7 +32,7 @@ main {
 /* START SCREEN */
 
 .start-screen {
-    display: none;
+    display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
@@ -84,7 +84,7 @@ h1 {
 /*   QUIZ SCREEN   */
 
 .quiz-screen {
-    display: contents;
+    display: none;
 }
 
 .quiz-question {
@@ -120,4 +120,14 @@ h1 {
     background-color: #4caf50;
     border-radius: inherit;
     transition: width 0.3s ease;
+}
+
+/*   Hide screen   */
+.hidden-screen {
+    display: none;
+}
+
+/*     Show screen    */
+.show-screen {
+    display: contents;
 }

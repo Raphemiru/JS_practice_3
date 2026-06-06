@@ -13,10 +13,25 @@ const totalQuestions = document.getElementById('total-questions');
 const currentScore = document.getElementById('current-score');
 const progressBar = document.getElementById('progress-bar');
 const progressFill = document.getElementById('progress-fill');
+const answersContainer = document.getElementById('answers');
 
 // screen state
 const STORAGE_KEY = 'quizState_v1';
 const state = { screen: 'start', currentIndex: 0, score: 0 };
+
+// example questions
+const questions = [
+    {
+        question: "What is the capital of France?",
+        answers: ["London", "Berlin", "Paris", "Madrid"],
+        correct: "Paris"
+    },
+    {
+        question: "What is 2 + 2?",
+        answers: ["3", "4", "5", "6"],
+        correct: "4"
+    }
+];
 
 const loadScreen = () => {
     const storage = localStorage.getItem(STORAGE_KEY);
@@ -58,6 +73,7 @@ const startQuiz = () => {
     currentScreen.screen = 'quiz';
     state.screen = 'quiz';
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    renderQuestion(questions[state.currentIndex]);
 };
 
 const quitQuiz = () => {
@@ -68,8 +84,33 @@ const quitQuiz = () => {
         startScreen.classList.add('show-screen');
         quizScreen.classList.remove('show-screen');
         quizScreen.classList.add('hidden-screen');
+        const storage = localStorage.getItem(STORAGE_KEY);
+        let currentScreen = {};
+
+        try {
+            currentScreen = storage ? JSON.parse(storage) : {};
+        } catch (error) {
+            alert(`Error: ${error}`);
+        }
+
+        currentScreen.screen = 'start';
+        state.screen = 'start';
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
     }
 };
+
+const renderQuestion = (questionsObj) => {
+    const { question, answers, correct } = questionsObj;
+    answersContainer.replaceChildren();
+
+    answers.forEach(answer => {
+        const answerButton = document.createElement('button');
+        answerButton.textContent = answer;
+        answerButton.className = 'answer-button';
+        answersContainer.append(answerButton);
+    });
+};
+
 
 startButton.addEventListener('click', startQuiz);
 quitButton.addEventListener('click', quitQuiz);

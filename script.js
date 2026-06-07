@@ -48,6 +48,7 @@ const loadScreen = () => {
         startScreen.classList.remove('show-screen')
         quizScreen.classList.add('show-screen');
         quizScreen.classList.remove('hidden-screen');
+        renderQuestionAssets(questions[state.currentIndex]);
     } else {
         startScreen.classList.remove('hidden-screen');
         startScreen.classList.add('show-screen');
@@ -73,7 +74,7 @@ const startQuiz = () => {
     currentScreen.screen = 'quiz';
     state.screen = 'quiz';
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-    renderQuestion(questions[state.currentIndex]);
+    renderQuestionAssets(questions[state.currentIndex]);
 };
 
 const quitQuiz = () => {
@@ -99,9 +100,12 @@ const quitQuiz = () => {
     }
 };
 
-const renderQuestion = (questionsObj) => {
-    const { question, answers, correct } = questionsObj;
+const renderQuestionAssets = (questionObj) => {
+    const { question, answers, correct } = questionObj;
     answersContainer.replaceChildren();
+    quizQuestion.replaceChildren();
+
+    quizQuestion.append(question);
 
     answers.forEach(answer => {
         const answerButton = document.createElement('button');

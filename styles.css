@@ -151,6 +151,13 @@ h1 {
     font-size: small;
 }
 
+/*   answer button   */
+
+.answer-button {
+    display: flex;
+    flex-direction: column;
+}
+
 /*   progress bar   */
 .progress-bar {
     width: 100%;

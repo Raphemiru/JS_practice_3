@@ -153,9 +153,41 @@ h1 {
 
 /*   answer button   */
 
+.answers {
+    display: block;
+    width: 100%;
+}
+
 .answer-button {
+    --button_radius: 0.75em;
+    --button_color: #e8e8e8;
+    --button_outline_color: #000000;
+    font-size: 17px;
+    font-weight: bold;
+    border: 2px solid var(--button_outline_color);
+    border-radius: var(--button_radius);
+    padding: 0.75em 1.5em;
+    background: var(--button_color);
+    color: var(--button_outline_color);
+    cursor: pointer;
+    box-shadow: 0 4px 0 var(--button_outline_color);
+    transform: translateY(0);
+    transition: all 0.1s ease;
     display: flex;
     flex-direction: column;
+    margin-bottom: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.answer-button:hover {
+    transform: translateY(-0.2em);
+    box-shadow: 0 6px 0 var(--button_outline_color);
+}
+
+.answer-button:active {
+    transform: translateY(0.2em);
+    box-shadow: 0 2px 0 var(--button_outline_color);
 }
 
 /*   progress bar   */

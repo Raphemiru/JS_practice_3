@@ -217,3 +217,28 @@ h1 {
 .show-screen {
     display: contents;
 }
+
+.answer-button.correct {
+    --button_outline_color: #2e7d32;
+    background: var(--button_outline_color);
+    box-shadow: 0 4px 0 var(--button_outline_color);
+    color: white;
+    transform: translateY(0.2em);
+    box-shadow: 0 2px 0 var(--button_outline_color);
+    transition: all 0.2s ease;
+}
+
+.answer-button.wrong {
+    --button_outline_color: #c62828;
+    background: var(--button_outline_color);
+    box-shadow: 0 4px 0 var(--button_outline_color);
+    color: white;
+    transform: translateY(0.2em);
+    box-shadow: 0 2px 0 var(--button_outline_color);
+    transition: all 0.2s ease;
+}
+
+.answer-button:disabled {
+    cursor: default;
+    pointer-events: none;
+}

@@ -115,8 +115,27 @@ const renderQuestionAssets = (questionObj) => {
     });
 };
 
+const answerButton = (event) => {
+    const correct = questions[state.currentIndex].correct;
+    const answer = event.target.textContent;
 
+    const allAnswerButtons = answersContainer.querySelectorAll('.answer-button');
+
+    allAnswerButtons.forEach(button => {
+        button.disabled = true;
+        if (button === event.target && answer === correct || button.textContent === correct) {
+            button.classList.add('correct');
+        } else {
+            button.classList.add('wrong');
+        }
+    });
+};
+
+
+
+answersContainer.addEventListener('click', answerButton);
 startButton.addEventListener('click', startQuiz);
 quitButton.addEventListener('click', quitQuiz);
+
 
 loadScreen();

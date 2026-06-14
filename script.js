@@ -118,18 +118,46 @@ const renderQuestionAssets = (questionObj) => {
 const answerButton = (event) => {
     const correct = questions[state.currentIndex].correct;
     const answer = event.target.textContent;
+    const isCorrect = answer === correct;
 
     const allAnswerButtons = answersContainer.querySelectorAll('.answer-button');
 
     allAnswerButtons.forEach(button => {
         button.disabled = true;
-        if (button === event.target && answer === correct || button.textContent === correct) {
+        if (button === event.target && isCorrect || button.textContent === correct) {
             button.classList.add('correct');
         } else {
             button.classList.add('wrong');
         }
     });
+
+    nextQuestion(isCorrect);
 };
+
+
+const nextQuestion = (isCorrect) => {
+    setTimeout(() => {
+        if (!isCorrect) {
+            currentScore.textContent = state.score
+        } else {
+            state.score++
+            currentScore.textContent = state.score + 1
+        }
+
+        const progressPercent = ((state.currentIndex + 1) / questions.length) * 100;
+        progressFill.style.width = `${progressPercent}%`;
+
+        // goes to the next question
+        state.currentIndex++
+        if (state.currentIndex < questions.length) {
+            renderQuestionAssets(questions[state.currentIndex]);
+        } else {
+            alert(`Quiz complete! Final score: ${state.score}/${questions.length}`);
+        }
+    }, 3000);
+};
+
+
 
 
 

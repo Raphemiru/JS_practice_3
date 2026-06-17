@@ -30,6 +30,21 @@ const questions = [
         question: "What is 2 + 2?",
         answers: ["3", "4", "5", "6"],
         correct: "4"
+    },
+    {
+        question: "Which planet is closest to the sun?",
+        answers: ["Venus", "Earth", "Mars", "Mercury"],
+        correct: "Mercury"
+    },
+    {
+        question: "What color is the sky?",
+        answers: ["Green", "Blue", "Red", "Yellow"],
+        correct: "Blue"
+    },
+    {
+        question: "How many sides does a triangle have?",
+        answers: ["2", "3", "4", "5"],
+        correct: "3"
     }
 ];
 
@@ -136,28 +151,29 @@ const answerButton = (event) => {
 
 
 const nextQuestion = (isCorrect) => {
+
+    if (!isCorrect) {
+        currentScore.textContent = state.score
+    } else {
+        state.score++
+        currentScore.textContent = state.score
+
+    }
+
+    const progressPercent = ((state.currentIndex + 1) / questions.length) * 100;
+    progressFill.style.width = `${progressPercent}%`;
+
+    // goes to the next question
     setTimeout(() => {
-        if (!isCorrect) {
-            currentScore.textContent = state.score
-        } else {
-            state.score++
-            currentScore.textContent = state.score + 1
-        }
-
-        const progressPercent = ((state.currentIndex + 1) / questions.length) * 100;
-        progressFill.style.width = `${progressPercent}%`;
-
-        // goes to the next question
         state.currentIndex++
         if (state.currentIndex < questions.length) {
             renderQuestionAssets(questions[state.currentIndex]);
+            currentQuestion.textContent = state.currentIndex + 1
         } else {
             alert(`Quiz complete! Final score: ${state.score}/${questions.length}`);
         }
-    }, 3000);
+    }, 2500);
 };
-
-
 
 
 

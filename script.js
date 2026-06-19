@@ -6,6 +6,8 @@ const quizScreen = document.getElementById('quiz-screen');
 const startButton = document.getElementById('start-button');
 
 // quizScreen assets
+const countDownTimerContainer = document.getElementById('countdown-timer-container');
+const countDownTimer = document.getElementById('countdown-timer');
 const quitButton = document.getElementById('quit-button');
 const quizQuestion = document.getElementById('quiz-question');
 const currentQuestion = document.getElementById('current-question');
@@ -49,6 +51,8 @@ const questions = [
 ];
 
 const loadScreen = () => {
+    countDownTimerContainer.classList.add('hidden-screen');
+    countDownTimerContainer.classList.remove('show-screen');
     const storage = localStorage.getItem(STORAGE_KEY);
     let currentScreen = {};
 
@@ -77,6 +81,8 @@ const startQuiz = () => {
     startScreen.classList.remove('show-screen')
     quizScreen.classList.add('show-screen');
     quizScreen.classList.remove('hidden-screen');
+    countDownTimerContainer.classList.add('hidden-screen');
+    countDownTimerContainer.classList.remove('show-screen');
     const storage = localStorage.getItem(STORAGE_KEY);
     let currentScreen = {};
 
@@ -157,14 +163,18 @@ const nextQuestion = (isCorrect) => {
     } else {
         state.score++
         currentScore.textContent = state.score
-
     }
+
+    countDownTimerContainer.classList.add('show-screen');
+    countDownTimerContainer.classList.remove('remove-screen');
 
     const progressPercent = ((state.currentIndex + 1) / questions.length) * 100;
     progressFill.style.width = `${progressPercent}%`;
 
     // goes to the next question
     setTimeout(() => {
+        countDownTimerContainer.classList.add('remove-screen');
+        countDownTimerContainer.classList.remove('show-screen');
         state.currentIndex++
         if (state.currentIndex < questions.length) {
             renderQuestionAssets(questions[state.currentIndex]);

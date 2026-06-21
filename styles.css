@@ -254,8 +254,9 @@
     }
 
     .countdown-timer-container {
+        justify-content: center;
         box-sizing: border-box;
-        width: 400px;
+        width: 450px;
         background-color: #ffffff;
         border: 2px solid #e0e0e0;
         border-radius: 12px;

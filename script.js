@@ -157,7 +157,6 @@ const answerButton = (event) => {
 
 
 const nextQuestion = (isCorrect) => {
-
     if (!isCorrect) {
         currentScore.textContent = state.score
     } else {
@@ -171,18 +170,26 @@ const nextQuestion = (isCorrect) => {
     const progressPercent = ((state.currentIndex + 1) / questions.length) * 100;
     progressFill.style.width = `${progressPercent}%`;
 
-    // goes to the next question
-    setTimeout(() => {
-        countDownTimerContainer.classList.add('remove-screen');
-        countDownTimerContainer.classList.remove('show-screen');
-        state.currentIndex++
-        if (state.currentIndex < questions.length) {
-            renderQuestionAssets(questions[state.currentIndex]);
-            currentQuestion.textContent = state.currentIndex + 1
-        } else {
-            alert(`Quiz complete! Final score: ${state.score}/${questions.length}`);
+    let secondsLeft = 3;
+    countDownTimer.textContent = secondsLeft;
+
+    const timer = setInterval(() => {
+        secondsLeft--;
+        countDownTimer.textContent = secondsLeft;
+
+        if (secondsLeft <= 0) {
+            state.currentIndex++
+            countDownTimerContainer.classList.add('remove-screen');
+            countDownTimerContainer.classList.remove('show-screen');
+            if (state.currentIndex < questions.length) {
+                renderQuestionAssets(questions[state.currentIndex]);
+                currentQuestion.textContent = state.currentIndex + 1
+            } else {
+                alert(`Quiz complete! Final score: ${state.score}/${questions.length}`);
+            }
+            clearInterval(timer);
         }
-    }, 2500);
+    }, 1000);
 };
 
 

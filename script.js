@@ -176,14 +176,22 @@ const nextQuestion = (isCorrect) => {
     const timer = setInterval(() => {
         secondsLeft--;
         countDownTimer.textContent = secondsLeft;
+        
+        const updateQuestionState = () => {
+            renderQuestionAssets(questions[state.currentIndex]);
+            currentQuestion.textContent = state.currentIndex + 1
+        };
 
         if (secondsLeft <= 0) {
             state.currentIndex++
             countDownTimerContainer.classList.add('remove-screen');
             countDownTimerContainer.classList.remove('show-screen');
             if (state.currentIndex < questions.length) {
-                renderQuestionAssets(questions[state.currentIndex]);
-                currentQuestion.textContent = state.currentIndex + 1
+                updateQuestionState();
+            } else if (state.currentIndex + 1 == questions.length {
+                updateQuestionState();
+                countDownTimerContainer.classList.add('hidden-screen');
+                countDownTimerContainer.classList.remove('show-screen');
             } else {
                 alert(`Quiz complete! Final score: ${state.score}/${questions.length}`);
             }

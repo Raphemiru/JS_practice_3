@@ -8,6 +8,7 @@ const startButton = document.getElementById('start-button');
 // quizScreen assets
 const countDownTimerContainer = document.getElementById('countdown-timer-container');
 const countDownTimer = document.getElementById('countdown-timer');
+const countDownText = document.getElementById('countdown-text');
 const quitButton = document.getElementById('quit-button');
 const quizQuestion = document.getElementById('quiz-question');
 const currentQuestion = document.getElementById('current-question');
@@ -171,7 +172,6 @@ const nextQuestion = (isCorrect) => {
     progressFill.style.width = `${progressPercent}%`;
 
     let secondsLeft = 3;
-    countDownTimer.textContent = secondsLeft;
 
     const timer = setInterval(() => {
         secondsLeft--;
